@@ -1,14 +1,12 @@
 'use client'
-// src/components/PathfinderVisualizer/index.tsx
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Grid } from './components/Grid';
 import { Controls } from './components/Controls';
 import { Legend } from './components/Legend';
 import { useGridState } from './useGridState';
 import { usePathfinding } from './usePathfinding';
 import { Position } from './types';
-import { ThemeToggle } from '@/components/ThemeToggle';
+
 
 const PathfinderVisualizer: React.FC = () => {
   // Define start and end positions
@@ -57,14 +55,7 @@ const PathfinderVisualizer: React.FC = () => {
   const handleMouseLeave = () => {
     setIsDrawing(false);
   };
-
   return (
-    <Card className="w-full max-w-4xl mx-auto dark:border-gray-700 dark:bg-gray-800">
-      <CardHeader className="flex flex-row items-center justify-between dark:bg-gray-800">
-        <CardTitle>Pathfinding Visualizer</CardTitle>
-        <ThemeToggle />
-      </CardHeader>
-      <CardContent className="dark:bg-gray-800">
         <div className="flex flex-col items-center space-y-4">
           <Controls
             onVisualize={visualizeDijkstra}
@@ -82,9 +73,6 @@ const PathfinderVisualizer: React.FC = () => {
 
           <Legend />
         </div>
-      </CardContent>
-    </Card>
   );
 };
-
 export default PathfinderVisualizer;
