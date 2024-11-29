@@ -34,3 +34,70 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ 
+
+```mermaid
+classDiagram
+    class PathfinderVisualizer {
+        -Position startNode
+        -Position finishNode
+        +render()
+    }
+
+    class Grid {
+        -Node[][] grid
+        +onMouseDown()
+        +onMouseEnter()
+        +onMouseUp()
+        +onMouseLeave()
+    }
+
+    class Node {
+        -number row
+        -number col
+        -boolean isStart
+        -boolean isFinish
+        -boolean isWall
+        -boolean isVisited
+        -boolean isPath
+        -number distance
+        -Node previousNode
+    }
+
+    class Controls {
+        +onVisualize()
+        +onClear()
+        -boolean isRunning
+    }
+
+    class Legend {
+        +render()
+    }
+
+    class useGridState {
+        +Node[][] grid
+        +boolean isDrawing
+        +initializeGrid()
+        +toggleWall()
+    }
+
+    class usePathfinding {
+        +boolean isRunning
+        +visualizeDijkstra()
+    }
+
+    class ThemeToggle {
+        -string theme
+        +toggleTheme()
+    }
+
+    PathfinderVisualizer --> Grid
+    PathfinderVisualizer --> Controls
+    PathfinderVisualizer --> Legend
+    PathfinderVisualizer --> ThemeToggle
+    PathfinderVisualizer ..> useGridState
+    PathfinderVisualizer ..> usePathfinding
+    Grid *-- Node
+    usePathfinding ..> Node
+    useGridState ..> Node
+```
