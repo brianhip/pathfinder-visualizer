@@ -55,8 +55,18 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		keyframes: {
+			'rotate-mobile': {
+				'0%': { transform: 'rotate(0deg)' },
+				'100%': { transform: 'rotate(90deg)' },
+			}
+		},
+		animation: {
+			'rotate-mobile': 'rotate-mobile 0.3s ease-in-out forwards',
+		}
   	}
   },
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

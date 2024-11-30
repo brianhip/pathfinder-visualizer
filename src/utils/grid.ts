@@ -1,9 +1,10 @@
 import { Node, Position } from '@/components/PathfinderVisualizer/types';
-import { GRID_ROWS, GRID_COLS } from '@/components/PathfinderVisualizer/constants';
+import { GRID_ROWS } from '@/components/PathfinderVisualizer/constants';
+// import { GRID_ROWS, GRID_COLS_DESKTOP, GRID_COLS_MOBILE } from '@/components/PathfinderVisualizer/constants';
 
-export const createInitialGrid = (startNode: Position, finishNode: Position): Node[][] => {
+export const createInitialGrid = (startNode: Position, finishNode: Position, GRID_COLS:number): Node[][] => {
   const grid: Node[][] = [];
-  
+
   for (let row = 0; row < GRID_ROWS; row++) {
     const currentRow: Node[] = [];
     for (let col = 0; col < GRID_COLS; col++) {

@@ -6,18 +6,19 @@ import { createInitialGrid } from '@/utils/grid';
 interface UseGridStateProps {
   startNode: Position;
   finishNode: Position;
-  GRID_COLS: number;
+  // Making it responsive
+  GRID_COLS:number;
 }
 
 export const useGridState = ({ startNode, finishNode, GRID_COLS }: UseGridStateProps) => {
   const [grid, setGrid] = useState<Node[][]>(() => 
-    createInitialGrid(startNode, finishNode, GRID_COLS)
+    createInitialGrid(startNode, finishNode, GRID_COLS )
   );
   const [isDrawing, setIsDrawing] = useState(false);
 
   const initializeGrid = useCallback(() => {
     setGrid(createInitialGrid(startNode, finishNode, GRID_COLS));
-  }, [startNode, finishNode, GRID_COLS]);
+  }, [startNode, finishNode, GRID_COLS ]);
 
   const toggleWall = useCallback((row: number, col: number) => {
     setGrid(prevGrid => {

@@ -1,19 +1,36 @@
 'use client'
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid } from './components/Grid';
 import { Controls } from './components/Controls';
 import { Legend } from './components/Legend';
 import { useGridState } from './useGridState';
 import { usePathfinding } from './usePathfinding';
 import { Position } from './types';
+import { GRID_COLS_DESKTOP, GRID_COLS_MOBILE } from '@/components/PathfinderVisualizer/constants';
 
 
 const PathfinderVisualizer: React.FC = () => {
   // Define start and end positions
-  const startNode: Position = { row: 7, col: 5 };
-  const finishNode: Position = { row: 7, col: 20 };
+  const startNode: Position = { row: 7, col: 1 };
+  const finishNode: Position = { row: 7, col: 13 };
+  
+  const useResponsiveValues = () => {
+    const [isMobile, setIsMobile] = useState<boolean>(false);
+  
+    useEffect(() => {
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth < 768);
+      };
+      
+      checkMobile();
+      window.addEventListener('resize', checkMobile);
+      return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
+    return isMobile ? GRID_COLS_MOBILE : GRID_COLS_DESKTOP;
+  };
   // Initialize grid state and controls
+  const GRID_COLS =useResponsiveValues()
   const {
     grid,
     setGrid,
@@ -23,7 +40,8 @@ const PathfinderVisualizer: React.FC = () => {
     toggleWall
   } = useGridState({
     startNode,
-    finishNode
+    finishNode,
+    GRID_COLS
   });
 
   // Initialize pathfinding functionality
@@ -62,7 +80,6 @@ const PathfinderVisualizer: React.FC = () => {
             onClear={initializeGrid}
             isRunning={isRunning}
           />
-
           <Grid
             grid={grid}
             onMouseDown={handleMouseDown}
@@ -70,7 +87,6 @@ const PathfinderVisualizer: React.FC = () => {
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
           />
-
           <Legend />
         </div>
   );
