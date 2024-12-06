@@ -46,7 +46,7 @@ src/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/pathfinding-visualizer.git
+git clone https://github.com/brianhip/pathfinding-visualizer.git
 ```
 
 2. Install dependencies:
